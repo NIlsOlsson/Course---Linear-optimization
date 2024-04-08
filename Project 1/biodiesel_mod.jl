@@ -28,7 +28,7 @@ function build_diet_model(data_file::String)
   @constraint(m, diesel_supply, sum(diesel_content[i]*x[i] for i in I) <= 150000)
   @constraint(m, land_limitation, sum(y[j] for j in J) <= 1600)
   @constraint(m, water_limitation, sum(water_requirement[j]*y[j] for j in J) <= 5000)
-  biodiesel_available = @expression(m, sum(y[j]*yield[j]*oil_content[j]*1000*0.9 for j in J))
+  biodiesel_available = @expression(m, sum(y[j]*yieldd[j]*oil_content[j]*1000*0.9 for j in J))
   @constraint(m, biodiesel_availability, sum(x[i]*(1-diesel_content[i]) for i in I) <= biodiesel_available)
 
 
