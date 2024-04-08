@@ -17,20 +17,20 @@ function build_diet_model(data_file::String)
   #name the model
   m = Model()
 
-  @variable(m, p[I] >= 0) #amout of fuel i
-  @variable(m, x[J] >= 0) #ha of crop j
+  @variable(m, x[I] >= 0) #amout of fuel i
+  @variable(m, y[J] >= 0) #ha of crop j
 
   #maximize profit
-  @objective(m, Max, sum(profit[i]*p[i] for i in I))
+  @objective(m, Max, sum(profit[i]*x[i] for i in I))
 
   #production constraints
-  @constraint(m, total_production, sum(p[i] for i in I) >= 280000)
-  @constraint(m, diesel_supply, sum(diesel_content[i]*p[i] for i in I) <= 150000)
-  @constraint(m, land_limitation, sum(x[j] for j in J) <= 1600)
-  @constraint(m, water_limitation, sum(water_requirement[j]*x[j] for j in J) <= 5000)
-  biodiesel_available = @expression(m, sum(x[j]*yield[j]*oil_content[j]*1000*0.9 for j in J))
-  @constraint(m, biodiesel_availability, sum(p[i]*(1-diesel_content[i]) for i in I) <= biodiesel_available)
+  @constraint(m, total_production, sum(x[i] for i in I) >= 280000)
+  @constraint(m, diesel_supply, sum(diesel_content[i]*x[i] for i in I) <= 150000)
+  @constraint(m, land_limitation, sum(y[j] for j in J) <= 1600)
+  @constraint(m, water_limitation, sum(water_requirement[j]*y[j] for j in J) <= 5000)
+  biodiesel_available = @expression(m, sum(y[j]*yield[j]*oil_content[j]*1000*0.9 for j in J))
+  @constraint(m, biodiesel_availability, sum(x[i]*(1-diesel_content[i]) for i in I) <= biodiesel_available)
 
 
-  return m, p, x
+  return m, y, x
 end
