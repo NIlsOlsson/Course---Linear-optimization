@@ -3,8 +3,8 @@ using JuMP
 using Gurobi
 using SparseArrays
 
-include("as_dat_large.jl")
-include("as_mod.jl")
+include("as_dat_large_2.jl")
+include("as_mod_2.jl")
 m, x, z = build_model()
 set_optimizer(m, Gurobi.Optimizer)
 # set_optimizer_attributes(m, "MIPGap" => 2e-2, "TimeLimit" => 3600)
@@ -41,4 +41,3 @@ println("solve time = $(solve_time(m))")
 #println("z = ")
 #println(z_val)
 
-#add_cut_to_small(m)
