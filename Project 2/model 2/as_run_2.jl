@@ -5,9 +5,9 @@ using SparseArrays
 
 include("as_dat_large_2.jl")
 include("as_mod_2.jl")
-m, x, z = build_model()
+m, x, z = build_model(true, true)
 set_optimizer(m, Gurobi.Optimizer)
-# set_optimizer_attributes(m, "MIPGap" => 2e-2, "TimeLimit" => 3600)
+set_optimizer_attributes(m, "MIPGap" => 4e-2)
 """
 Some useful parameters for the Gurobi solver:
     SolutionLimit = k : the search is terminated after k feasible solutions has been found
