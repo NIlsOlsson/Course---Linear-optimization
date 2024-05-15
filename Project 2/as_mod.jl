@@ -28,6 +28,8 @@ function build_model(relax_x::Bool = false, relax_z::Bool = false)
   ReplaceOnlyAtMaintenance = @constraint(m, [i in Components, t in 1:T],
   x[i,t] <= z[t])
 
+  RemainingLife = @constraint(m, [i in Components; U[i] < T+r], sum(x[i,t] for t in (T+r-U[i]):T) >= 1)
+
   return m, x, z
 end
 """

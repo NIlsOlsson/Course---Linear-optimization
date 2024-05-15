@@ -24,7 +24,7 @@ Some useful output & functions
 """
 #optimize!(m)
 #obj_ip = objective_value(m)
-#unset_binary.(x)
+unset_binary.(x)
 #unset_binary.(z)
 optimize!(m)
 #obj = objective_value(m)
@@ -33,12 +33,12 @@ optimize!(m)
 
 println("solve time = $(solve_time(m))")
 
-#x_val = sparse(value.(x.data))
-#z_val = sparse(value.(z))
+x_val = sparse(value.(x.data))
+z_val = sparse(value.(z))
 
-#println("x  = ")
-#println(x_val)
-#println("z = ")
-#println(z_val)
+println("x  = ")
+println(x_val)
+println("z = ")
+println(z_val)
 
 #add_cut_to_small(m)
