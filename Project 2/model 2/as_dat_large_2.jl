@@ -2,7 +2,7 @@
 Components = 1:10 # 10 components
 
 # Parameters
-T = 700    #number of timesteps
+T = 400    #number of timesteps
 I = [(s, t) for s in 0:T for t in (s + 1):(T + 1)] # time intervals
 d = ones(1,T)*20      #cost of a maintenance occasion
 max_cost = T*(20+10*34) + 1
